@@ -1,7 +1,8 @@
 import Baobab from 'baobab';
 
 const tree = new Baobab({
-  counter: 0
+  list: [],
+  visibilityFilter: 'SHOW_ALL',
 });
 
 export default tree;

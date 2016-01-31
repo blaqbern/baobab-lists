@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { root } from 'baobab-react/higher-order';
 import tree from './state';
-import App from './containers/App';
+import App from './components/App';
 
 const RootedApp = root(App, tree);
 
