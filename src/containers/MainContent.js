@@ -13,7 +13,6 @@ class MainContent extends Component {
   }
   render() {
     const {list, visibilityFilter, actions} = this.props;
-    console.log('list:', list, 'visibilityFilter:', visibilityFilter);
     const visibleItems = this.getVisibleItems(list, visibilityFilter);
     return (
       <div className="main-content">
@@ -24,7 +23,6 @@ class MainContent extends Component {
           }
         />
         <ul>
-          {console.log(visibleItems)}
           {visibleItems.map((item) =>
             <li key={item.id}>
               <Item
