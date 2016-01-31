@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Item from '../components/Item';
 import AddNew from '../components/AddNew';
+import Footer from '../components/Footer';
 import { branch } from 'baobab-react/higher-order';
 import * as _actions from '../actions';
 
@@ -8,7 +9,8 @@ class MainContent extends Component {
   getVisibleItems(items, visibilityFilter) {
     return items.filter(
       (item) =>
-        visibilityFilter === 'SHOW_ALL'
+        visibilityFilter === 'SHOW_ALL' ||
+        item.tags.indexOf(visibilityFilter) !== -1
     );
   }
   render() {
@@ -40,9 +42,16 @@ class MainContent extends Component {
               >
                 {'remove'}
               </button>
+              <AddNew
+                what={'custom tag'}
+                handleAddClick={
+                  (tag) => actions.addTag(item.id, tag)
+                }
+              />
             </li>
           )}
         </ul>
+        <Footer />
       </div>
     );
   }
@@ -53,10 +62,12 @@ export default branch(MainContent, {
   cursors: {
     list: ['list'],
     visibilityFilter: ['visibilityFilter'],
+    tags: ['tags'],
   },
   actions: {
     addItem: _actions.addItem,
     removeItem: _actions.removeItem,
     toggleCompleted: _actions.toggleCompleted,
+    addTag: _actions.addTag,
   },
 });

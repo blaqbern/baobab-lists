@@ -4,6 +4,7 @@ const Item = ({
   text,
   completed,
   handleClick,
+  tags,
 }) => {
   return (
     <div className="item">
@@ -13,6 +14,11 @@ const Item = ({
       >
         {text}
       </p>
+      <ul>
+        {tags.map(
+          (tag, index) => <li key={index}>{tag}</li>
+        )}
+      </ul>
     </div>
   );
 };
