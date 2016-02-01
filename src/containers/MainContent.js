@@ -3,7 +3,7 @@ import Item from '../components/Item';
 import AddNew from '../components/AddNew';
 import Footer from '../components/Footer';
 import { branch } from 'baobab-react/higher-order';
-import * as _actions from '../actions';
+import * as actions from '../actions';
 
 class MainContent extends Component {
   getVisibleItems(items, visibilityFilter) {
@@ -14,14 +14,21 @@ class MainContent extends Component {
     );
   }
   render() {
-    const {list, visibilityFilter, actions} = this.props;
+    const { list, visibilityFilter } = this.props;
+    const {
+      addItem,
+      removeItem,
+      toggleCompleted,
+      addTag
+    } = this.props.actions;
+
     const visibleItems = this.getVisibleItems(list, visibilityFilter);
     return (
       <div className="main-content">
         <AddNew
           what="item"
           handleAddClick={
-            (text) => actions.addItem(text)
+            (text) => addItem(text)
           }
         />
         <ul>
@@ -31,13 +38,13 @@ class MainContent extends Component {
                 text={item.text}
                 completed={item.completed}
                 handleClick={
-                  () => actions.toggleCompleted(item.id)
+                  () => toggleCompleted(item.id)
                 }
                 tags={item.tags}
               />
               <button
                 onClick={
-                  () => actions.removeItem(item.id)
+                  () => removeItem(item.id)
                 }
               >
                 {'remove'}
@@ -45,7 +52,7 @@ class MainContent extends Component {
               <AddNew
                 what={'custom tag'}
                 handleAddClick={
-                  (tag) => actions.addTag(item.id, tag)
+                  (tag) => addTag(item.id, tag)
                 }
               />
             </li>
@@ -65,9 +72,9 @@ export default branch(MainContent, {
     tags: ['tags'],
   },
   actions: {
-    addItem: _actions.addItem,
-    removeItem: _actions.removeItem,
-    toggleCompleted: _actions.toggleCompleted,
-    addTag: _actions.addTag,
+    addItem: actions.addItem,
+    removeItem: actions.removeItem,
+    toggleCompleted: actions.toggleCompleted,
+    addTag: actions.addTag,
   },
 });

@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { branch } from 'baobab-react/higher-order';
-import * as _actions from '../actions';
+import * as actions from '../actions';
 import Filter from '../containers/Filter';
 
 class Footer extends Component {
   render() {
-    const { tags, actions } = this.props;
+    const { tags } = this.props;
+    const { setVisibilityFilter } = this.props.actions;
     return (
       <div className="footer">
         <h3>{"Show only items from:"}</h3>
@@ -16,7 +17,7 @@ class Footer extends Component {
                 <Filter
                   filter={tag}
                   handleClick={
-                    () => actions.setVisibilityFilter(tag)
+                    () => setVisibilityFilter(tag)
                   }
                 />
               </li>
@@ -25,7 +26,7 @@ class Footer extends Component {
             <Filter
               filter={'SHOW_ALL'}
               handleClick={
-                () => actions.setVisibilityFilter('SHOW_ALL')
+                () => setVisibilityFilter('SHOW_ALL')
               }
             />
           </li>
@@ -41,6 +42,6 @@ export default branch(Footer, {
     tags: ['tags']
   },
   actions: {
-    setVisibilityFilter: _actions.setVisibilityFilter
+    setVisibilityFilter: actions.setVisibilityFilter
   },
 });
