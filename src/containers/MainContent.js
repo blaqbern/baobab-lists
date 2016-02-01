@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Item from '../components/Item';
 import AddNew from '../components/AddNew';
-import Footer from '../components/Footer';
+import Footer from './Footer';
 import { branch } from 'baobab-react/higher-order';
 import * as actions from '../actions';
 

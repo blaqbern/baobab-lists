@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { branch } from 'baobab-react/higher-order';
 import * as actions from '../actions';
-import Filter from '../containers/Filter';
+import Filter from '../components/Filter';
 
 class Footer extends Component {
   render() {
