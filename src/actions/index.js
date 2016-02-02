@@ -32,25 +32,32 @@ export const toggleCompleted = (tree, id) => {
 };
 
 export const addTag = (tree, id, tag) => {
+  const formattedTag = tag.replace(' ', '_').toUpperCase();
   tree.set('list',
     tree.get('list').map(
       (item) => {
         if(item.id === id) {
-          return Object.assign({}, item, {
-            tags: [
-              ...item.tags,
-              tag
-            ]
-          });
+          if(!item.tags.includes(formattedTag)) {
+            return Object.assign({}, item, {
+              tags: [
+                ...item.tags,
+                formattedTag
+              ]
+            });
+          }
         }
         return item;
       }
     )
   );
-  tree.set('tags', [
-    ...tree.get('tags'),
-    tag
-  ])
+
+  const currentTags = tree.get('tags');
+  if(!currentTags.includes(formattedTag)) {
+    tree.set('tags', [
+      ...currentTags,
+      formattedTag
+    ]);
+  }
 };
 
 export const setVisibilityFilter = (tree, filter) => {
